@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_scanner"
+        android:title="QRScanner"
+        android:icon="@drawable/baseline_camera"/>
+
+    <item android:id="@+id/nav_registry"
+        android:title="Registry"
+        android:icon="@drawable/baseline_registry"/>
+
+    <item android:id="@+id/nav_complaints"
+        android:title="Complaints"
+        android:icon="@drawable/baseline_complaints"/>
+
+    <item android:id="@+id/nav_equipment"
+        android:title="Equipment"
+        android:icon="@drawable/baseline_sports_equipment"/>
+</menu>
