@@ -24,9 +24,9 @@ public class Adminlogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminlogin);
 
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.pass);
-        login = findViewById(R.id.changePassword);
+        email = findViewById(R.id.userEmail);
+        password = findViewById(R.id.userPass);
+        login = findViewById(R.id.login);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

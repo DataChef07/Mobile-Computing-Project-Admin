@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/link_blue"
     tools:context=".AdminHome">
 
 
@@ -30,7 +31,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
-        android:background="#35D8C9"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/nav_items"
