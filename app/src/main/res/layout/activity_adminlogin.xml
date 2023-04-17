@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Adminlogin">
+    tools:context=".Adminlogin"
+    android:background="@color/white">
 
     <ImageView
         android:layout_gravity="center"
@@ -16,11 +17,15 @@
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="30dp"
         android:background="@drawable/custom_box">
@@ -91,6 +96,7 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 
 
