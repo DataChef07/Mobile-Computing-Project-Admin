@@ -54,8 +54,18 @@ public class ScannerFragment extends Fragment {
                         Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
                         Dialog dialog=new Dialog(getContext());
                         dialog.setContentView(R.layout.camera_dialogue);
-                        TextView t1=dialog.findViewById(R.id.text11);
-                        t1.setText(String.valueOf(result.getText()));
+                        TextView t1,t2,t3;
+                        String s1= result.getText();
+                        t1=dialog.findViewById(R.id.email);
+                        t2=dialog.findViewById(R.id.sport);
+                        t3=dialog.findViewById(R.id.time);
+                        String [] s2=s1.split("$");
+                        t1.setText(s2[0]);
+//                        t2.setText(s2[1]);
+//                        t3.setText(s2[2]);
+
+
+
                         dialog.show();
                     }
                 });
