@@ -35,6 +35,7 @@ public class ScannerFragment extends Fragment {
 
         codeScannerView = view.findViewById(R.id.QRScanner);
 
+
 //        if(!permission())
 //            reqPermission();
         Handler mHandler = new Handler(Looper.getMainLooper());
@@ -46,6 +47,8 @@ public class ScannerFragment extends Fragment {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+
+
                         Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
