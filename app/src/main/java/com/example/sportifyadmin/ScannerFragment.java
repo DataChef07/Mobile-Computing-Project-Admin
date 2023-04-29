@@ -1,5 +1,6 @@
 package com.example.sportifyadmin;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.CodeScanner;
@@ -50,6 +52,11 @@ public class ScannerFragment extends Fragment {
 
 
                         Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
+                        Dialog dialog=new Dialog(getContext());
+                        dialog.setContentView(R.layout.camera_dialogue);
+                        TextView t1=dialog.findViewById(R.id.text11);
+                        t1.setText(String.valueOf(result.getText()));
+                        dialog.show();
                     }
                 });
             }
