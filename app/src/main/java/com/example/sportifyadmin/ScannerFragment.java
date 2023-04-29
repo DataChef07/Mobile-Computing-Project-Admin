@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +60,17 @@ public class ScannerFragment extends Fragment {
                         t1=dialog.findViewById(R.id.email);
                         t2=dialog.findViewById(R.id.sport);
                         t3=dialog.findViewById(R.id.time);
-                        String [] s2=s1.split("$");
-                        t1.setText(s2[0]);
-//                        t2.setText(s2[1]);
-//                        t3.setText(s2[2]);
+                        String [] s2=s1.split("--");
+                        try {
+                            t1.setText(s2[0]);
+                            t2.setText(s2[1]);
+                            t3.setText(s2[2]);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.d("Data misssing", "run: "+e);
+                        }
+
 
 
 
