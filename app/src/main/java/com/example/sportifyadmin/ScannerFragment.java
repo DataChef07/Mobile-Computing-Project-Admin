@@ -95,7 +95,7 @@ public class ScannerFragment extends Fragment {
 
                         String [] s2=s1.split("--");
                         try {
-                            t1.setText(s2[0]);
+//                            t1.setText(s2[0]);
                             t2.setText(s2[1]);
 //                            t3.setText(s2[2]);
                             DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -131,7 +131,9 @@ public class ScannerFragment extends Fragment {
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(getContext(), "Submit button", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+//                                codeScanner.stopPreview();
+//                                codeScanner.startPreview();
                             }
                         });
                     }
