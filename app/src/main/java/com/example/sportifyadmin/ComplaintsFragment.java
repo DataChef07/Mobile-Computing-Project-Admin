@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.sportifyadmin.model.ComplaintsModel;
 import com.example.sportifyadmin.model.EquipmentModel;
@@ -23,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComplaintsFragment extends Fragment {
 
@@ -59,10 +63,29 @@ public class ComplaintsFragment extends Fragment {
         complaintsDb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Map<String, HashMap> temp;
+//                Map<String, HashMap> fetchedData = (HashMap<String, HashMap>) snapshot.getValue();
+//                for (Map.Entry<String, HashMap> entry : fetchedData.entrySet()){
+//                    temp = entry.getValue();
+////                    list.add(model);
+//                }
+                Toast.makeText(getContext(), "sample toast", Toast.LENGTH_SHORT).show();
+                Log.d("snapshot", "snapshot: ===> " + snapshot);
                 for(DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
-                    ComplaintsModel model = dataSnapshot.getValue(ComplaintsModel.class);
-                    list.add(model);
+                    Log.d("snapshot", "dataSnapshot: ===> "+ dataSnapshot);
+//                    String key = dataSnapshot.getKey();
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        Log.d("snapshot", "ds: ===> "+ ds);
+                        ComplaintsModel model = ds.getValue(ComplaintsModel.class);
+                        list.add(model);
+//                        for(DataSnapshot last: ds.getChildren()){
+//                            ComplaintsModel model = last.getValue(ComplaintsModel.class);
+//                            list.add(model);
+//                        }
+                    }
+//                    ComplaintsModel model = dataSnapshot.getValue(ComplaintsModel.class);
+//                    list.add(model);
                 }
                 complaintsAdapter.notifyDataSetChanged();
             }

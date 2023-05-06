@@ -9,7 +9,7 @@ public class ComplaintsModel {
     public ComplaintsModel() {
     }
 
-    public ComplaintsModel(String sport, String type, String text) {
+    public ComplaintsModel(String text, String type, String sport) {
         this.sport = sport;
         this.type = type;
         this.text = text;
