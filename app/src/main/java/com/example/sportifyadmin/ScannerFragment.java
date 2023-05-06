@@ -13,6 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import java.util.Map;
 
 public class ScannerFragment extends Fragment {
     private CodeScannerView codeScannerView;
+    private int equipment=0;
     private CodeScanner codeScanner;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,17 +68,36 @@ public class ScannerFragment extends Fragment {
                         Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
                         Dialog dialog=new Dialog(getContext());
                         dialog.setContentView(R.layout.camera_dialogue);
-                        TextView t1,t2,t3;
+
+                        Spinner spinner=dialog.findViewById(R.id.spinner);
+                        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line,getResources().getStringArray(R.array.equipment));
+                        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                        spinner.setAdapter(adapter);
+                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                equipment=position;
+                                //Toast.makeText(getContext(), String.valueOf(equipment), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                        TextView t1,t2;
+                        Button submit;
+                        submit=dialog.findViewById(R.id.submit);
                         String s1= result.getText();
                         t1=dialog.findViewById(R.id.email);
                         t2=dialog.findViewById(R.id.sport);
-                        t3=dialog.findViewById(R.id.time);
+//                        t3=dialog.findViewById(R.id.time);
 
                         String [] s2=s1.split("--");
                         try {
                             t1.setText(s2[0]);
                             t2.setText(s2[1]);
-                            t3.setText(s2[2]);
+//                            t3.setText(s2[2]);
                             DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("Users");
                             obj.child(s2[0]).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -103,10 +127,13 @@ public class ScannerFragment extends Fragment {
                             Log.d("Data misssing", "run: "+e);
                         }
 
-
-
-
                         dialog.show();
+                        submit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getContext(), "Submit button", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

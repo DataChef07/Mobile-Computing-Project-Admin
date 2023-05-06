@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="Email Id: "
+                        android:text="Name: "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="Sport Name: "
+                        android:text="Sport: "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
@@ -76,32 +76,55 @@
                     </TextView>
 
                 </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <TextView-->
+<!--                        android:text="Time: "-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="22sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        >-->
+<!--                    </TextView>-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/time"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="18sp"-->
+<!--                        >-->
+<!--                    </TextView>-->
+
+<!--                </LinearLayout>-->
                 <LinearLayout
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="Time: "
+                        android:text="Equipment: "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         >
                     </TextView>
-                    <TextView
-                        android:id="@+id/time"
-                        android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        >
-                    </TextView>
+
+                        />
 
                 </LinearLayout>
 
+
+
                 <Button
                     android:layout_marginTop="20dp"
-                    android:id="@+id/login"
+                    android:id="@+id/submit"
                     android:text="Submit"
                     android:background="@drawable/custom_box"
                     android:textColor="@color/white"
