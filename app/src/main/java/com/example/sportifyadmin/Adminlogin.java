@@ -26,6 +26,8 @@ public class Adminlogin extends AppCompatActivity {
 
         email = findViewById(R.id.userEmail);
         password = findViewById(R.id.userPass);
+        email.setText("ADMIN");
+        password.setText("ADMIN@123");
         login = findViewById(R.id.login);
 
         login.setOnClickListener(new View.OnClickListener() {
