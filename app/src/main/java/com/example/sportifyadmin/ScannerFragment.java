@@ -19,7 +19,15 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScannerFragment extends Fragment {
     private CodeScannerView codeScannerView;
@@ -60,11 +68,35 @@ public class ScannerFragment extends Fragment {
                         t1=dialog.findViewById(R.id.email);
                         t2=dialog.findViewById(R.id.sport);
                         t3=dialog.findViewById(R.id.time);
+
                         String [] s2=s1.split("--");
                         try {
                             t1.setText(s2[0]);
                             t2.setText(s2[1]);
                             t3.setText(s2[2]);
+                            DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("Users");
+                            obj.child(s2[0]).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String name = snapshot.getValue(String.class);
+                                    Log.d("name check", "name ===>    "+ name);
+                                    t1.setText(name);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+//                            DatabaseReference snapshot = FirebaseDatabase.getInstance().getReference();
+//                            String user= String.valueOf(snapshot.getDatabase());
+//                            Map<String, HashMap> temp;
+//                            Map<String, HashMap> fetchedData = (HashMap<String, HashMap>) snapshot.get
+//                            String name = String.valueOf(mDatabase.child("name"));
+//                            Log.d("123", "run: "+user);
+//                            t1.setText(user);
+//                            t1.setText(name);
                         }
                         catch (Exception e)
                         {
