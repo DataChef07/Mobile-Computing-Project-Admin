@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportifyadmin.R;
 import com.example.sportifyadmin.model.ComplaintsModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -23,10 +25,14 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
 
     Context context;
     ArrayList<ComplaintsModel> complaintsList;
+    ArrayList<String> userid;
+    ArrayList<String> compid;
 
-    public ComplaintsAdapter(Context context, ArrayList<ComplaintsModel> complaintsList) {
+    public ComplaintsAdapter(Context context, ArrayList<ComplaintsModel> complaintsList, ArrayList<String> userid, ArrayList<String> compid) {
         this.context = context;
         this.complaintsList = complaintsList;
+        this.userid = userid;
+        this.compid = compid;
     }
 
     @NonNull
@@ -67,6 +73,34 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
                 Dialog dialog1=new Dialog(v.getContext());
                 dialog1.setContentView(R.layout.complaint_dialogue);
                 dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                TextView initiated, progress, complete;
+                initiated=dialog1.findViewById(R.id.initiated);
+                progress = dialog1.findViewById(R.id.onprogress);
+                complete = dialog1.findViewById(R.id.oncomplete);
+
+                DatabaseReference obj = FirebaseDatabase.getInstance().getReference("complaints").child(userid.get(position)).child(compid.get(position));
+                initiated.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        obj.child("state").setValue("initiated");
+                    }
+                });
+
+                progress.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        obj.child("state").setValue("progress");
+                    }
+                });
+
+                complete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        obj.child("state").setValue("complete");
+                    }
+                });
+
                 dialog1.show();
             }
         });

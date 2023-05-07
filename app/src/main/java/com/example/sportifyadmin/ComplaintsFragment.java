@@ -34,6 +34,8 @@ public class ComplaintsFragment extends Fragment {
     DatabaseReference complaintsDb;
     ComplaintsAdapter complaintsAdapter;
     ArrayList<ComplaintsModel> list;
+    ArrayList<String> userid;
+    ArrayList<String> compid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,13 @@ public class ComplaintsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.complaints_recyclerView);
         complaintsDb = FirebaseDatabase.getInstance().getReference("complaints");
         list = new ArrayList<>();
+        userid = new ArrayList<>();
+        compid = new ArrayList<>();
+
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        complaintsAdapter = new ComplaintsAdapter(getContext(), list);
+        complaintsAdapter = new ComplaintsAdapter(getContext(), list, userid, compid);
         recyclerView.setAdapter(complaintsAdapter);
 
         complaintsDb.addValueEventListener(new ValueEventListener() {
@@ -70,13 +75,27 @@ public class ComplaintsFragment extends Fragment {
 ////                    list.add(model);
 //                }
 //                Toast.makeText(getContext(), "sample toast", Toast.LENGTH_SHORT).show();
+
                 Log.d("snapshot", "snapshot: ===> " + snapshot);
                 list.clear();
+                userid.clear();
+                compid.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
+//                    userid.add(snapshot.getKey());
+//                    Log.d("userid", "userid ===>  " + snapshot.getKey());
+//                    compid.add(dataSnapshot.getKey());
+//                    Log.d("userid", "userid ===>  " + dataSnapshot.getKey());
                     Log.d("snapshot", "dataSnapshot: ===> "+ dataSnapshot);
-//                    String key = dataSnapshot.getKey();
+                    String key = dataSnapshot.getKey();
+
+                    Log.d("userid", "key ===>  " + key);
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        userid.add(key);
+                        Log.d("compid", "cid ===>  " + ds.getKey());
+                        String cid = ds.getKey();
+                        compid.add(cid);
+
                         Log.d("snapshot", "ds: ===> "+ ds);
                         ComplaintsModel model = ds.getValue(ComplaintsModel.class);
                         list.add(model);
@@ -85,9 +104,12 @@ public class ComplaintsFragment extends Fragment {
 //                            list.add(model);
 //                        }
                     }
+
 //                    ComplaintsModel model = dataSnapshot.getValue(ComplaintsModel.class);
 //                    list.add(model);
                 }
+                Log.d("USER_ARRAY", "userlist ===>  "+ userid);
+                Log.d("COMP_ARRAY", "complist ===>  "+ compid);
                 complaintsAdapter.notifyDataSetChanged();
             }
 
