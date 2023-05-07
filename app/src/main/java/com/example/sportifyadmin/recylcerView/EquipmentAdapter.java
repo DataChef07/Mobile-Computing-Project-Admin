@@ -16,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportifyadmin.R;
 import com.example.sportifyadmin.model.EquipmentModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.EquipmentViewHolder> {
     Context context;
@@ -54,16 +57,26 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.Equi
                 c_minus=dialog.findViewById(R.id.C_minus);
                 e_plus=dialog.findViewById(R.id.E_plus);
                 e_minus=dialog.findViewById(R.id.E_minus);
-                final float[] c1 = new float[1];
-                final float[] e1 = new float[1];
-                c1[0] =Float.valueOf(model.getCourts());
-                e1[0] =Float.valueOf(model.getEquipments());
+                final int[] c1 = new int[1];
+                final int[] e1 = new int[1];
+                c1[0] =Integer.parseInt(model.getCourts());
+                e1[0] =Integer.parseInt(model.getEquipments());
                 c_value=dialog.findViewById(R.id.court_value1);
                 e_value=dialog.findViewById(R.id.equipment_value);
                 sport_name.setText(model.getName());
 //                Toast.makeText(context, String.valueOf(model.getCourts()), Toast.LENGTH_SHORT).show();
                 c_value.setText(String.valueOf(c1[0]));
                 e_value.setText(String.valueOf(e1[0]));
+
+                HashMap<String, String> mp = new HashMap<>();
+                mp.put("Air Hockey", "airhockey");
+                mp.put("Badminton", "badminton");
+                mp.put("Football", "football");
+                mp.put("Squash", "squash");
+                mp.put("Table Tennis", "tabletennis");
+                mp.put("Tennis", "tennis");
+
+                DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("test");
                 c_plus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -95,6 +108,12 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.Equi
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String sport = mp.get(model.getName());
+                        obj.child(sport).child("courts").setValue(String.valueOf(c1[0]));
+                        obj.child(sport).child("equipments").setValue(String.valueOf(e1[0]));
+                        c_value.setText(String.valueOf(c1[0]));
+                        e_value.setText(String.valueOf(e1[0]));
+                        dialog.cancel();
 
                     }
                 });

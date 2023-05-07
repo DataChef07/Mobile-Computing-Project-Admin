@@ -56,6 +56,7 @@ public class EquipmentFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // fetching the data from "Equipment" key from firebase
+                list.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
                     EquipmentModel equipment = dataSnapshot.getValue(EquipmentModel.class);
