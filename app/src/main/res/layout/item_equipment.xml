@@ -5,8 +5,9 @@
     android:id="@+id/equipment1"
     app:cardElevation="10dp"
     app:cardCornerRadius="8dp"
-    android:layout_margin="10dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
