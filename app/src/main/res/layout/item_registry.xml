@@ -22,12 +22,14 @@
 
             <TextView
                 android:text="Name: "
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/userName"
                 android:text="User Name"
+                android:fontFamily="@font/abril_fatface"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -41,12 +43,14 @@
 
             <TextView
                 android:text="Sport: "
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/userSport"
                 android:text="User Name"
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -60,12 +64,14 @@
 
             <TextView
                 android:text="Equipment count: "
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/userEquipment"
                 android:text="User Name"
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -79,12 +85,14 @@
 
             <TextView
                 android:text="Check In Time: "
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/userTimeStamp"
                 android:text="User Name"
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
