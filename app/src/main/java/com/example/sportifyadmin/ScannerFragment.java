@@ -46,6 +46,8 @@ public class ScannerFragment extends Fragment {
     Boolean[] matchedval = {false};
     String[] ts = {""};
     int[] rating = {0};
+    int[] equip = {0};
+    Boolean[] signin_val = {false};
     Handler handler = new Handler();
     Runnable runnable;
     String userName;
@@ -149,6 +151,74 @@ public class ScannerFragment extends Fragment {
                             Log.d("Data misssing", "run: "+e);
                         }
 
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                        String timestamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new java.util.Date());
+                        Date d1 = null;
+                        try {
+                            d1 = sdf.parse(timestamp);
+                            Date d2 = sdf.parse(s2[2]);
+                            long diff = d1.getTime() - d2.getTime();
+                            diff = (diff / (1000 * 60)) % 60;
+                            Log.d("datacheck", "timestamp: ===> " + d1);
+                            Log.d("datacheck", "t2: ===> " + d2);
+                            Log.d("datacheck", "diff: ===> " + diff);
+                            if (diff >= 1) {
+                                //invalid QR ===> ask user to refresh it
+                                dialog.show();
+                            }
+                            else{
+
+                                DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
+                                obj.child("Users").child(s2[0]).child("signedin")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            signin_val[0] = snapshot.getValue(Boolean.class);
+                                            Log.d("signin_val", "signin_val[0] ===>  " + signin_val[0]);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                obj.child("Users").child(s2[0]).child("equipment")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                equip[0] = snapshot.getValue(Integer.class);
+                                                Log.d("equipment", "equip[0] ===>  " + equip[0]);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                handler.postDelayed(runnable = new Runnable(){
+
+                                    @Override
+                                    public void run() {
+                                        if(!signin_val[0]){
+                                            //user already signedin display his name and equipment taken by him
+                                            DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
+                                            obj.child("Users").child(s2[0]).child("signedin").setValue(false);
+                                            obj.child("Users").child(s2[0]).child("equipment").setValue(0);
+
+                                        }
+                                        else{
+
+                                        }
+                                    }
+                                }, 3000);
+                            }
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
                         dialog.show();
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -214,7 +284,7 @@ public class ScannerFragment extends Fragment {
                                             Date d1 = null;
                                             try {
                                                 d1 = sdf.parse(timestamp);
-                                                Date d2 = sdf.parse(s2[2]);
+                                                Date d2 = sdf.parse(ts[0]);
                                                 long diff = d1.getTime() - d2.getTime();
                                                 diff = (diff / (1000 * 60)) % 60;
                                                 Log.d("datacheck", "timestamp: ===> " + d1);
