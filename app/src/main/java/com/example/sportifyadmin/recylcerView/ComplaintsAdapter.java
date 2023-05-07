@@ -40,15 +40,15 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
         int myColor2 = Color.parseColor("#FFFFE0");
         int myColor3 = Color.parseColor("#90EE90");
 
-        if(model.getProgress().equals("initiated"))
+        if(model.getState().equals("initiated"))
         {
             holder.complaint.setBackgroundColor(myColor1);
         }
-        if(model.getProgress().equals("progress"))
+        if(model.getState().equals("progress"))
         {
             holder.complaint.setBackgroundColor(myColor2);
         }
-        if(model.getProgress().equals("complete"))
+        if(model.getState().equals("complete"))
         {
             holder.complaint.setBackgroundColor(myColor3);
         }

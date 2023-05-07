@@ -71,6 +71,7 @@ public class ComplaintsFragment extends Fragment {
 //                }
 //                Toast.makeText(getContext(), "sample toast", Toast.LENGTH_SHORT).show();
                 Log.d("snapshot", "snapshot: ===> " + snapshot);
+                list.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
                     Log.d("snapshot", "dataSnapshot: ===> "+ dataSnapshot);

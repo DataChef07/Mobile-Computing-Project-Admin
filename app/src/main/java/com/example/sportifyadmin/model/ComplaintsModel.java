@@ -8,28 +8,28 @@ public class ComplaintsModel {
     String sport;
     String type;
     String text;
-    String progress;
+    String state;
 
     public ComplaintsModel() {
     }
 
-    public ComplaintsModel(String text, String type, String sport,String progress) {
+    public ComplaintsModel(String state,String text, String type, String sport) {
         this.sport = sport;
         this.type = type;
         this.text = text;
-        this.progress=progress;
+        this.state=state;
     }
 
-    public String getProgress()
-    {
-        Log.d("check", "getProgress: ====>"+progress);
-        return (progress);
+    public void setState(String state) {
+        this.state = state;
     }
-    public String setProgress(String s)
+
+    public String getState()
     {
-        this.progress=progress;
-        return s;
+        Log.d("check", "getProgress: ====>"+state);
+        return (state);
     }
+
     public String getSport() {
         return "Sport: "+sport;
     }
