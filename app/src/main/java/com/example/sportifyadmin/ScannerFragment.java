@@ -30,6 +30,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +41,11 @@ public class ScannerFragment extends Fragment {
     private CodeScannerView codeScannerView;
     private int equipment=0;
     private CodeScanner codeScanner;
+    Boolean[] matchedval = {false};
+    String[] ts = {""};
+    int[] rating = {0};
+    Handler handler = new Handler();
+    Runnable runnable;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -131,9 +140,95 @@ public class ScannerFragment extends Fragment {
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                dialog.cancel();
-//                                codeScanner.stopPreview();
-//                                codeScanner.startPreview();
+                                Log.d("time", "onClick: ===> " + s2[2]);
+                                DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
+                                obj.child("Users").child(s2[0]).child("signedin").setValue(true);
+                                obj.child("Users").child(s2[0]).child("equipment").setValue(equipment);
+
+                                obj.child("Users").child(s2[0]).child("timer")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                ts[0] = snapshot.getValue(String.class);
+                                                Log.d("timer", "ts[0] ===>  " + ts[0]);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+
+                                obj.child("Users").child(s2[0]).child("rating")
+                                        .addListenerForSingleValueEvent((new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                rating[0] = snapshot.getValue(Integer.class);
+                                                Log.d("rating", "rating[0] ===>  " + rating[0]);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        }));
+
+
+                                obj.child("Users").child(s2[0]).child("matched")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                matchedval[0] = snapshot.getValue(Boolean.class);
+                                                Log.d("matchedval", "matchedval[0] ===>  " + matchedval[0]);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                handler.postDelayed(runnable = new Runnable(){
+
+                                    @Override
+                                    public void run() {
+//                                        handler.postDelayed(runnable, 3000);
+                                        if(matchedval[0] && !ts[0].equals("")){
+                                            Log.d("check", "check");
+                                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                                            String timestamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new java.util.Date());
+                                            Date d1 = null;
+                                            try {
+                                                d1 = sdf.parse(timestamp);
+                                                Date d2 = sdf.parse(s2[2]);
+                                                long diff = d1.getTime() - d2.getTime();
+                                                diff = (diff / (1000 * 60)) % 60;
+                                                Log.d("datacheck", "timestamp: ===> " + d1);
+                                                Log.d("datacheck", "t2: ===> " + d2);
+                                                Log.d("datacheck", "diff: ===> " + diff);
+                                                if(diff>=20){
+                                                    obj.child("Users").child(s2[0]).child("rating").setValue(rating[0]-2);
+                                                }
+                                                else{
+                                                    obj.child("Users").child(s2[0]).child("rating").setValue(rating[0]+1);
+                                                }
+                                                obj.child("Users").child(s2[0]).child("matched").setValue(false);
+                                                obj.child("Users").child(s2[0]).child("timer").setValue("");
+                                                obj.child("Users").child(s2[0]).child("sport").setValue("");
+                                            } catch (ParseException e) {
+                                                throw new RuntimeException(e);
+                                            }
+
+                                        }
+
+//                                        obj.child("test").child(s2[1]).child("equipments").setValue(temp);
+                                        dialog.cancel();
+
+                                    }
+                                }, 3000);
+
+
                             }
                         });
                     }
