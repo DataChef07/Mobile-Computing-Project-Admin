@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sportifyadmin.R;
 import com.example.sportifyadmin.model.EquipmentModel;
 import com.google.firebase.database.DatabaseReference;
