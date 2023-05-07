@@ -1,6 +1,7 @@
 package com.example.sportifyadmin.recylcerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -36,8 +37,9 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
     @Override
     public void onBindViewHolder(@NonNull ComplaintsViewHolder holder, int position) {
         ComplaintsModel model = complaintsList.get(position);
+
         int myColor1 = Color.parseColor("#FFCCCB");
-        int myColor2 = Color.parseColor("#FFFFE0");
+        int myColor2 = Color.parseColor("#ffe140");
         int myColor3 = Color.parseColor("#90EE90");
 
         if(model.getState().equals("initiated"))
@@ -53,9 +55,20 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
             holder.complaint.setBackgroundColor(myColor3);
         }
 
+
         holder.sport.setText(model.getSport());
         holder.type.setText(model.getType());
         holder.text.setText(model.getText());
+        holder.complaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Dialog dialog1=new Dialog(v.getContext());
+                dialog1.setContentView(R.layout.complaint_dialogue);
+                dialog1.show();
+            }
+        });
+
 
     }
 
