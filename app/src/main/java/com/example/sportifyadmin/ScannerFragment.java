@@ -107,6 +107,8 @@ public class ScannerFragment extends Fragment {
 //                            t1.setText(s2[0]);
                             t2.setText(s2[1]);
 //                            t3.setText(s2[2]);
+                            Log.d("date", "run: "+s2[2]);
+                            
                             DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("Users");
                             obj.child(s2[0]).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -121,6 +123,7 @@ public class ScannerFragment extends Fragment {
 
                                 }
                             });
+
 
 //                            DatabaseReference snapshot = FirebaseDatabase.getInstance().getReference();
 //                            String user= String.valueOf(snapshot.getDatabase());
