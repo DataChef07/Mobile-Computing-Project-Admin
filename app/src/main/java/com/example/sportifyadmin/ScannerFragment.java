@@ -51,6 +51,7 @@ public class ScannerFragment extends Fragment {
     Handler handler = new Handler();
     Runnable runnable;
     String userName;
+    Button checkout;
 
     private FirebaseAuth auth;
     DatabaseReference mDatabase;
@@ -155,10 +156,10 @@ public class ScannerFragment extends Fragment {
                         String timestamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new java.util.Date());
                         Date d1 = null;
                         Dialog dialog1=new Dialog(getContext());
-                        dialog.setContentView(R.layout.camera_dialogue_invalidqr);
+                        dialog1.setContentView(R.layout.camera_dialogue_invalidqr);
                         Dialog dialog2=new Dialog(getContext());
-                        dialog.setContentView(R.layout.camera_dialogue_checkout);
-                        Button checkout=dialog2.findViewById(R.id.check_out);
+                        dialog2.setContentView(R.layout.camera_dialogue_checkout);
+                        checkout=dialog2.findViewById(R.id.check_out);
                         try {
                             d1 = sdf.parse(timestamp);
                             Date d2 = sdf.parse(s2[2]);
@@ -207,11 +208,17 @@ public class ScannerFragment extends Fragment {
 
                                     @Override
                                     public void run() {
-                                        if(!signin_val[0]){
+                                        if(signin_val[0]){
                                             //user already signedin display his name and equipment taken by him
+                                            TextView name1,sport1,equipment1;
+                                            name1=dialog2.findViewById(R.id.name);
+                                            sport1=dialog2.findViewById(R.id.sport);
+                                            equipment1=dialog2.findViewById(R.id.equipment2);
+                                            name1.setText(userName);
+                                            sport1.setText(s2[1]);
+                                            equipment1.setText(String.valueOf(equip[0]));
+                                            Log.d("checked in value", "run: "+signin_val[0]);
                                             dialog2.show();
-
-
 
                                         }
                                         else{
@@ -231,6 +238,7 @@ public class ScannerFragment extends Fragment {
                                 DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
                                 obj.child("Users").child(s2[0]).child("signedin").setValue(false);
                                 obj.child("Users").child(s2[0]).child("equipment").setValue(0);
+                                dialog2.cancel();
                             }
                         });
 
