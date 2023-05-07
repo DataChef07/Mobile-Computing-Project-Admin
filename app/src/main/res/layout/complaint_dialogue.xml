@@ -32,6 +32,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/initiated"
                     android:background="#FFCCCB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/onprogress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#ffe140"
@@ -74,6 +76,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/oncomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#90EE90"
