@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
 
                 Dialog dialog1=new Dialog(v.getContext());
                 dialog1.setContentView(R.layout.complaint_dialogue);
+                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog1.show();
             }
         });
