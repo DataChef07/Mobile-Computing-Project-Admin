@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.sportifyadmin.model.AddUser;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +48,10 @@ public class ScannerFragment extends Fragment {
     int[] rating = {0};
     Handler handler = new Handler();
     Runnable runnable;
+    String userName;
+
+    private FirebaseAuth auth;
+    DatabaseReference mDatabase;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class ScannerFragment extends Fragment {
 
 
         codeScannerView = view.findViewById(R.id.QRScanner);
+
+        auth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("registry");
 
 
 //        if(!permission())
@@ -114,6 +123,7 @@ public class ScannerFragment extends Fragment {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String name = snapshot.getValue(String.class);
+                                    userName = name;
                                     Log.d("name check", "name ===>    "+ name);
                                     t1.setText(name);
                                 }
@@ -230,6 +240,14 @@ public class ScannerFragment extends Fragment {
 
                                     }
                                 }, 3000);
+
+                                // code for storing the data in registry table
+//                                String name;
+//                                String sport;
+//                                String equipment;
+//                                String timestamp;
+                                AddUser newUser = new AddUser(userName,s2[1],String.valueOf(equipment),s2[2]);
+                                mDatabase.push().setValue(newUser);
 
 
                             }
