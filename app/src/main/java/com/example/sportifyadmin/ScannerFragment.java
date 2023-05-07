@@ -1,6 +1,7 @@
 package com.example.sportifyadmin;
 
 import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -170,6 +171,7 @@ public class ScannerFragment extends Fragment {
                             Log.d("datacheck", "diff: ===> " + diff);
                             if (diff >= 1) {
                                 //invalid QR ===> ask user to refresh it
+                                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog1.show();
 
                             }
@@ -218,11 +220,13 @@ public class ScannerFragment extends Fragment {
                                             sport1.setText(s2[1]);
                                             equipment1.setText(String.valueOf(equip[0]));
                                             Log.d("checked in value", "run: "+signin_val[0]);
+                                            dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                             dialog2.show();
 
                                         }
                                         else{
 
+                                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                             dialog.show();
                                         }
                                     }
@@ -329,6 +333,7 @@ public class ScannerFragment extends Fragment {
 
 //                                        obj.child("test").child(s2[1]).child("equipments").setValue(temp);
                                         dialog.cancel();
+
 
                                     }
                                 }, 3000);
