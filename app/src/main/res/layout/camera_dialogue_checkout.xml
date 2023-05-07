@@ -126,7 +126,7 @@
             <Button
                 android:layout_marginTop="20dp"
                 android:id="@+id/check_out"
-                android:text="Submit"
+                android:text="Checkout"
                 android:background="@drawable/custom_box"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/link_blue"

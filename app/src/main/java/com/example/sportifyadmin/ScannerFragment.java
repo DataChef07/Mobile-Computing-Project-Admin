@@ -154,6 +154,11 @@ public class ScannerFragment extends Fragment {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                         String timestamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new java.util.Date());
                         Date d1 = null;
+                        Dialog dialog1=new Dialog(getContext());
+                        dialog.setContentView(R.layout.camera_dialogue_invalidqr);
+                        Dialog dialog2=new Dialog(getContext());
+                        dialog.setContentView(R.layout.camera_dialogue_checkout);
+                        Button checkout=dialog2.findViewById(R.id.check_out);
                         try {
                             d1 = sdf.parse(timestamp);
                             Date d2 = sdf.parse(s2[2]);
@@ -164,7 +169,8 @@ public class ScannerFragment extends Fragment {
                             Log.d("datacheck", "diff: ===> " + diff);
                             if (diff >= 1) {
                                 //invalid QR ===> ask user to refresh it
-                                dialog.show();
+                                dialog1.show();
+
                             }
                             else{
 
@@ -203,13 +209,14 @@ public class ScannerFragment extends Fragment {
                                     public void run() {
                                         if(!signin_val[0]){
                                             //user already signedin display his name and equipment taken by him
-                                            DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
-                                            obj.child("Users").child(s2[0]).child("signedin").setValue(false);
-                                            obj.child("Users").child(s2[0]).child("equipment").setValue(0);
+                                            dialog2.show();
+
+
 
                                         }
                                         else{
 
+                                            dialog.show();
                                         }
                                     }
                                 }, 3000);
@@ -218,8 +225,15 @@ public class ScannerFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
 
+                        checkout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                DatabaseReference obj = FirebaseDatabase.getInstance().getReference();
+                                obj.child("Users").child(s2[0]).child("signedin").setValue(false);
+                                obj.child("Users").child(s2[0]).child("equipment").setValue(0);
+                            }
+                        });
 
-                        dialog.show();
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
