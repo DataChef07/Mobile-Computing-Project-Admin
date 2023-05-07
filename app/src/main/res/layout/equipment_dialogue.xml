@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="383dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_box"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/sport_name1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="Sport_name"
+                android:textColor="@color/color_secondary"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Court: "
+                    android:textSize="22sp"
+                    android:textStyle="bold"></TextView>
+
+                <ImageView
+                    android:id="@+id/C_plus"
+                    android:layout_width="82dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/ic_minus"
+                    app:backgroundTint="@color/blue_500"
+                    app:rippleColor="@color/colorAccent">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/court_value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:text="1.0"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+                <ImageView
+                    android:id="@+id/C_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="0dp"
+                    android:src="@drawable/ic_add"
+                    app:backgroundTint="@color/blue_500"
+                    app:rippleColor="@color/colorAccent">
+
+                </ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Equipment: "
+                    android:textSize="22sp"
+                    android:textStyle="bold"></TextView>
+
+                <ImageView
+                    android:id="@+id/E_plus"
+                    android:layout_width="82dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/ic_minus"
+                    app:backgroundTint="@color/blue_500"
+                    app:rippleColor="@color/colorAccent">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/equipment_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:text="1.0"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+
+                <ImageView
+                    android:id="@+id/E_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_add"
+                    app:backgroundTint="@color/blue_500"
+                    app:rippleColor="@color/colorAccent">
+
+                </ImageView>
+
+                <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    android:layout_marginLeft="20dp"-->
+                <!--                    android:src="@drawable/ic_add"-->
+                <!--                    app:backgroundTint="@color/blue_500"-->
+                <!--                    app:rippleColor="@color/colorAccent"-->
+                <!--                    android:id="@+id/E_minus"-->
+                <!--                    >-->
+
+                <!--                </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_box"
+                android:backgroundTint="@color/link_blue"
+                android:text="Submit"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
