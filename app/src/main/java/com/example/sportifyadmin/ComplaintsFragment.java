@@ -69,7 +69,7 @@ public class ComplaintsFragment extends Fragment {
 //                    temp = entry.getValue();
 ////                    list.add(model);
 //                }
-                Toast.makeText(getContext(), "sample toast", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "sample toast", Toast.LENGTH_SHORT).show();
                 Log.d("snapshot", "snapshot: ===> " + snapshot);
                 for(DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
