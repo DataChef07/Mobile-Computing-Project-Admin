@@ -75,6 +75,7 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.Equi
                 mp.put("Squash", "squash");
                 mp.put("Table Tennis", "tabletennis");
                 mp.put("Tennis", "tennis");
+                mp.put("swimming", "swimming");
 
                 DatabaseReference obj = FirebaseDatabase.getInstance().getReference().child("test");
                 c_plus.setOnClickListener(new View.OnClickListener() {
