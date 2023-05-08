@@ -87,7 +87,7 @@ public class ScannerFragment extends Fragment {
                     public void run() {
 
 
-                        Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
                         Dialog dialog=new Dialog(getContext());
                         dialog.setContentView(R.layout.camera_dialogue);
 
